@@ -1,7 +1,9 @@
 import { Elysia, t } from 'elysia'
 import { swagger } from '@elysiajs/swagger'
+import { cors } from '@elysiajs/cors'
 
-export const api = new Elysia({ prefix: '/api' })
+const app = new Elysia()
+  .use(cors())
   .use(swagger({
     documentation: {
       info: {
@@ -14,7 +16,7 @@ export const api = new Elysia({ prefix: '/api' })
   .onBeforeHandle(({ request }) => {
     console.log(`[${new Date().toISOString()}] ${request.method} ${new URL(request.url).pathname}`)
   })
-  .get('/time', () => ({
+  .get('/api/time', () => ({
     timestamp: new Date().toISOString(),
     unix: Date.now()
   }), {
@@ -23,5 +25,7 @@ export const api = new Elysia({ prefix: '/api' })
       unix: t.Number()
     })
   })
-
-export type API = typeof api
+  .listen(4000, () => {
+    console.log('🚀 Elysia API running on http://localhost:4000')
+    console.log('📚 Swagger docs at http://localhost:4000/swagger')
+  })
