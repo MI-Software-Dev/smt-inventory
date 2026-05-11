@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@elysiajs/eden": "^1.1.0",
+    "@elysiajs/swagger": "^0.8.0",
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "2.0.0-alpha.2",
     "elysia": "^1.1.0",
