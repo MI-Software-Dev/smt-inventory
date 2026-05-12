@@ -1,14 +1,8 @@
 import { edenTreaty } from "@elysiajs/eden"
-import type { Elysia } from 'elysia'
+import type { App } from "../../server"
 
 const isServer = typeof window === 'undefined'
 
-type API = {
-  '/api/time': {
-    get: { response: { timestamp: string; unix: number } }
-  }
-}
-
-export const client = edenTreaty<API>(
+export const client = edenTreaty<App>(
   isServer ? 'http://localhost:4000' : 'http://localhost:4000'
 )
